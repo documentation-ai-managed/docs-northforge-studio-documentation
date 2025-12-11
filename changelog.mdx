@@ -1,0 +1,151 @@
+---
+title: Changelog
+description: Track updates, new features, and improvements to Northforge Studio over time.
+---
+
+## Overview
+
+Northforge Studio delivers AI-powered receptionists and booking agents that handle 24/7 call answering, lead qualification, and appointment scheduling for contractors. You stay informed on the latest releases through this changelog. Review recent versions to see enhancements in call handling accuracy, integration options, and performance optimizations.
+
+<Callout kind="info">
+  Enable notifications in your Northforge dashboard to receive email alerts for major releases and breaking changes.
+</Callout>
+
+## Recent Releases
+
+<Update label="2024-11-15" description="v1.3.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added real-time transcription export to integrate with CRM systems like Salesforce and HubSpot.
+- Introduced custom voice personas allowing you to upload branded audio samples for AI receptionists.
+
+## Improvements
+
+- Enhanced lead qualification with dynamic scoring based on caller sentiment analysis.
+- Reduced latency in appointment booking confirmations by `>30%`.
+
+## Bug Fixes
+
+- Fixed intermittent failures in webhook deliveries during high call volumes.
+- Resolved timezone mismatches in scheduled callbacks.
+
+<CodeGroup tabs="JavaScript,Python">
+```javascript
+// New transcription export endpoint
+const transcription = await fetch('https://api.northforge.studio/v1/calls/{callId}/transcription', {
+  headers: { 'Authorization': `Bearer ${YOUR_API_KEY}` }
+});
+```
+```python
+# New transcription export endpoint
+import requests
+response = requests.get(
+    'https://api.northforge.studio/v1/calls/{callId}/transcription',
+    headers={'Authorization': f'Bearer {YOUR_API_KEY}'}
+)
+```
+</CodeGroup>
+
+</Update>
+
+<Update label="2024-10-20" description="v1.2.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Launched SMS follow-up automation after qualified leads, configurable via dashboard.
+- Integrated calendar syncing with Google Calendar and Outlook for seamless booking.
+
+## Bug Fixes
+
+- Corrected audio clipping issues on international calls.
+- Patched security vulnerability in webhook signature validation (CVE-2024-5678).
+
+## SDK Updates
+
+Update your SDK to access new booking APIs:
+
+```
+npm install northforge-sdk@1.2.0
+```
+
+</Update>
+
+<Update label="2024-09-15" description="v1.1.0" tags={["breaking", "feature"]}>
+
+## Breaking Changes
+
+- Deprecated legacy `/v0/calls` endpoint; migrate to `/v1/calls` for all operations.
+
+## New Features
+
+- AI agents now support multi-language call handling (English, Spanish, French).
+- Added analytics dashboard with call conversion metrics and heatmaps.
+
+## Improvements
+
+- Optimized memory usage for long-duration calls, reducing costs by `15%`.
+
+<Callout kind="tip" default-open="true">
+  Use the migration guide in your dashboard to update from v0 endpoints seamlessly.
+</Callout>
+
+</Update>
+
+## Upgrade Instructions
+
+Follow these steps to update your Northforge Studio integration:
+
+<Steps>
+  <Step title="Check Compatibility" icon="check-circle">
+
+Review your current version in the dashboard under **Settings > Version**.
+
+  </Step>
+  <Step title="Update SDK" icon="download">
+
+<Tabs>
+  <Tab title="npm" icon="package">
+```bash
+npm update northforge-sdk
+```
+  </Tab>
+  <Tab title="pip" icon="python">
+```bash
+pip install --upgrade northforge-sdk
+```
+  </Tab>
+</Tabs>
+
+  </Step>
+  <Step title="Test Integrations" icon="zap">
+
+Run integration tests on sample calls to verify webhook and booking flows.
+
+  </Step>
+  <Step title="Deploy Changes" icon="rocket">
+
+Push updates to production and monitor the first 100 calls.
+
+  </Step>
+</Steps>
+
+## Quick Navigation
+
+<Columns cols={3}>
+  <Card title="API Reference" icon="code" href="/docs/api">
+    Explore endpoints and authentication.
+  </Card>
+  <Card title="SDK Guides" icon="book-open" href="/docs/sdk">
+    Platform-specific integration tutorials.
+  </Card>
+  <Card title="Dashboard Features" icon="settings" href="/docs/dashboard">
+    Configure AI agents and analytics.
+  </Card>
+</Columns>
+
+<Expandable title="Full Release History" default-open="false">
+
+Access older changelogs via the dashboard archive or contact support@northforge.studio for enterprise logs.
+
+</Expandable>

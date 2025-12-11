@@ -1,0 +1,173 @@
+---
+title: Getting Started with Northforge
+description: Follow these steps to set up your account, create your first AI receptionist, and begin capturing leads right away.
+---
+
+## Overview
+
+Northforge Studio empowers contractors with AI-powered receptionists that handle calls 24/7, qualify leads, and book appointments automatically. You reduce missed calls and capture more revenue without hiring extra staff. This quickstart guides you through account setup, agent configuration, and launch in under 10 minutes.
+
+<Callout kind="tip">
+  Prepare your business phone number and preferred working hours before starting. Northforge integrates with major providers like Twilio and RingCentral.
+</Callout>
+
+## Quickstart Steps
+
+Follow these sequential steps to deploy your first AI receptionist.
+
+<Steps>
+  <Step title="Create Account" icon="user-plus">
+
+    Visit [northforge.ai](https://northforge.ai) and click **Sign Up**.
+
+    1. Enter your email, business name, and phone number.
+    2. Verify your email via the confirmation link.
+    3. Set a strong password.
+
+    <Image
+      src="https://example.com/signup-screenshot.png"
+      alt="Northforge signup form"
+      width="800"
+      height="500"
+    />
+
+  </Step>
+
+  <Step title="Log In and Configure Agent" icon="settings">
+
+    Log in at [app.northforge.ai](https://app.northforge.ai).
+
+    Create your first agent:
+
+    <Tabs>
+      <Tab title="Basic Setup" icon="zap">
+
+        1. Click **New Agent** > **AI Receptionist**.
+        2. Name it (e.g., "Contractor Leads").
+        3. Set availability: `{ "monday": "9-5", "friday": "9-3" }`.
+        4. Add scripts: "Hi, this is Northforge for [Business]. How can we help schedule your project?"
+
+      </Tab>
+      <Tab title="Advanced" icon="cpu">
+
+```javascript
+// Custom greeting script example
+const greeting = {
+  intro: "Welcome to [Your Business]. I'm your AI assistant.",
+  qualify: "What's your project budget range?"
+};
+```
+
+        Paste custom JSON for lead qualification flows.
+
+      </Tab>
+    </Tabs>
+
+    Save and assign your phone number via Twilio integration.
+
+  </Step>
+
+  <Step title="Test Your Agent" icon="phone">
+
+    Use the built-in simulator or dial your number.
+
+    <Request tabs="cURL,JavaScript" show-lines="true">
+```curl
+curl -X POST https://api.northforge.ai/v1/test-call \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "phone": "+15551234567",
+    "agentId": "rec_abc123"
+  }'
+```
+```javascript
+const response = await fetch('https://api.northforge.ai/v1/test-call', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    phone: '+15551234567',
+    agentId: 'rec_abc123'
+  })
+});
+```
+    </Request>
+
+    Listen for the greeting and simulate a lead booking.
+
+  </Step>
+
+  <Step title="Launch and Monitor" icon="rocket">
+
+    Toggle **Live** in the dashboard.
+
+    Monitor calls in real-time:
+
+    <CodeGroup tabs="Dashboard,API">
+```javascript
+// Fetch recent calls
+const calls = await fetch('https://api.northforge.ai/v1/calls?limit=10', {
+  headers: { 'Authorization': 'Bearer YOUR_API_KEY' }
+}).then(r => r.json());
+```
+    </CodeGroup>
+
+    Review transcripts and booked appointments daily.
+
+  </Step>
+</Steps>
+
+## Next Steps
+
+Explore these resources to optimize your setup.
+
+<Columns cols={3}>
+  <Card title="Integrations" icon="plug" href="/docs/integrations">
+    Connect calendars, CRMs, and payment systems.
+  </Card>
+  <Card title="Custom Scripts" icon="code" href="/docs/scripts">
+    Build advanced lead qualification logic.
+  </Card>
+  <Card title="Analytics" icon="bar-chart-3" href="/docs/analytics">
+    Track call conversion rates and ROI.
+  </Card>
+</Columns>
+
+## Troubleshooting
+
+<ExpandableGroup>
+  <Expandable title="Agent not answering?" default-open="true">
+
+    Check:
+    - Phone number forwarding to Northforge.
+    - Agent status is **Live**.
+    - Sufficient credits in account.
+
+    Contact support at support@northforge.ai.
+
+  </Expandable>
+  <Expandable title="Webhook setup">
+
+    Configure webhooks for real-time notifications:
+
+```javascript
+// Example Node.js webhook handler
+app.post('/webhook/northforge', (req, res) => {
+  const { event, data } = req.body;
+  if (event === 'lead_booked') {
+    // Notify team
+    console.log(`New booking: ${data.appointment}`);
+  }
+  res.status(200).send('OK');
+});
+```
+
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="success">
+  Congratulations! Your AI receptionist is live. Expect 20-30% more leads within the first week.
+</Callout>

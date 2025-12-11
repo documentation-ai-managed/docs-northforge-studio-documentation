@@ -1,0 +1,132 @@
+---
+title: Frequently Asked Questions
+description: Find answers to common queries about using Northforge, from setup troubleshooting to service limitations and best practices.
+---
+
+## Account and Billing Inquiries
+
+Northforge handles your subscription seamlessly. You manage everything through the dashboard.
+
+<Columns cols={3}>
+  <Card title="Update Payment" icon="credit-card" href="#update-payment">
+    Change your card details quickly.
+  </Card>
+  <Card title="View Invoices" icon="file-text" href="#view-invoices">
+    Download past bills.
+  </Card>
+  <Card title="Cancel Subscription" icon="x" href="#cancel-sub">
+    Steps to pause service.
+  </Card>
+</Columns>
+
+<ExpandableGroup>
+  <Expandable id="update-payment" title="How do I update my payment method?" default-open="true">
+
+Follow these steps to change your billing information.
+
+<Steps>
+  <Step title="Log In" icon="log-in">
+    Access your dashboard at `https://studio.northforge.ai`.
+  </Step>
+  <Step title="Navigate to Billing" icon="settings">
+    Click **Account** > **Billing** in the sidebar.
+  </Step>
+  <Step title="Edit Card" icon="edit">
+    Select **Update Payment Method** and enter new details.
+  </Step>
+</Steps>
+
+  </Expandable>
+
+  <Expandable id="view-invoices" title="Where can I find my invoices?">
+    Navigate to **Account** > **Billing** > **Invoices**. Download PDFs for any period.
+  </Expandable>
+
+  <Expandable id="cancel-sub" title="How do I cancel my subscription?">
+    Go to **Account** > **Billing** > **Subscription**. Click **Cancel Plan**. Service ends at the billing cycle close.
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="tip">
+  Contact support@northforge.ai for prorated refunds or billing disputes.
+</Callout>
+
+## Performance and Reliability
+
+Northforge delivers `>99.9%` uptime for your AI receptionists.
+
+### Common Troubleshooting
+
+```javascript
+// Check agent status via API
+const response = await fetch('https://api.northforge.ai/v1/agents/status', {
+  headers: {
+    'Authorization': `Bearer ${YOUR_API_KEY}`
+  }
+});
+const status = await response.json();
+console.log(status.uptime); // e.g., "99.95%"
+```
+
+<CodeGroup tabs="JavaScript,Python">
+```javascript
+const response = await fetch('https://api.northforge.ai/v1/agents/status', {
+  headers: { 'Authorization': `Bearer ${YOUR_API_KEY}` }
+});
+```
+```python
+import requests
+response = requests.get(
+  'https://api.northforge.ai/v1/agents/status',
+  headers={'Authorization': f'Bearer {YOUR_API_KEY}'}
+)
+```
+</CodeGroup>
+
+<Tabs>
+  <Tab title="Call Drops" icon="phone">
+    Ensure your phone number forwards correctly. Test with `<555-0123>`.
+  </Tab>
+  <Tab title="Slow Responses" icon="clock">
+    Peak hours may add `2-5s` latency. Upgrade to Priority plan.
+  </Tab>
+</Tabs>
+
+## Privacy and Data Security
+
+You control all call data. Northforge complies with GDPR and CCPA.
+
+| Feature | Description | Enabled By Default |
+|---------|-------------|--------------------|
+| Call Recording | Transcribe and store calls | Yes |
+| Data Retention | Delete after 30 days | Configurable |
+| Encryption | End-to-end for transcripts | Yes |
+
+<Callout kind="alert">
+  Never share `YOUR_API_KEY` publicly. Regenerate if compromised.
+</Callout>
+
+<ExpandableGroup>
+  <Expandable title="How is my data protected?">
+    All data uses AES-256 encryption at rest and TLS 1.3 in transit. Access logs track admin actions.
+  </Expandable>
+  <Expandable title="Can I delete my data?">
+    Yes. Use the dashboard or API:
+
+````javascript
+await fetch('https://api.northforge.ai/v1/data/delete', {
+  method: 'POST',
+  headers: { 'Authorization': `Bearer ${YOUR_API_KEY}` },
+  body: JSON.stringify({ days: 30 })
+});
+````
+
+  </Expandable>
+  <Expandable title="Third-party integrations?">
+    Northforge integrates only with approved services like Google Calendar. Review in **Settings** > **Integrations**.
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="success">
+  Audit your security settings monthly for best practices.
+</Callout>
